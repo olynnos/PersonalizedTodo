@@ -4,7 +4,7 @@ import ToDoItem from './ToDoItem';
 
 export default function ToDoList({ name }) {
 
-    const [todos, setTodos] = useState([{ id: 1, action: "Finish this project", done: true }])
+    const [todos, setTodos] = useState([{ id: 1, action: "Finish this project", status: true }])
     let [newTodo, setNewTodo] = useState("");
 
     const updateToDo = (e) => {
@@ -26,7 +26,19 @@ export default function ToDoList({ name }) {
                 ({todos.filter(t => !t.status).length} items to do)
             </h4>
             <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
-                {todos.map(todo => <ToDoItem key={todo.id} id={todo.id} action={todo.action} status={todo.status} />)}
+                <table className="table table-striped table-hover text-center">
+                    <thead className="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {todos.map(todo => <ToDoItem key={todo.id} id={todo.id} action={todo.action} status={todo.status} />)}
+                    </tbody>
+                </table>
                 <div className="input-group w-50 my-1">
                     <input
                         type="text"
