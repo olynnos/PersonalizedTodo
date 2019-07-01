@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+
+import ToDoList from './components/ToDoList'
 
 function App() {
+
+  // Using hooks to add a state to a function component and initiating the username state
+  // mulitple states can be made using this method
+  let [userName, setName] = useState('');
+  let [nameChecked, setChecked] = useState(false)
+
+  const changeName = (e) => {
+    setName(e.target.value)
+  }
+
+  const nameCheck = () => {
+    setChecked(true)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+
+      {
+        !nameChecked ?
+          <>
+            <h4>Hello there, what is your name?</h4>
+            <input type="text"
+              placeholder='your name here'
+              onChange={changeName}
+            />
+            {
+              userName !== "" && <button className='btn btn-primary m-2' onClick={nameCheck}>Ok</button>
+            }
+          </>
+          :
+          <>
+            <ToDoList name={userName} />
+          </>
+      }
+
     </div>
-  );
+  )
 }
 
 export default App;
