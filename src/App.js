@@ -18,20 +18,21 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="container-fluid">
 
       {
-        !nameChecked ?
-          <>
-            <h4>Hello there, what is your name?</h4>
+        nameChecked === false ?
+          <div className="d-flex flex-column justify-content-center align-items-center" style={{ height: '100vh' }}>
+            <h1>Hello there, what is your name?</h1>
             <input type="text"
+              className="form-control shadow-none"
               placeholder='your name here'
               onChange={changeName}
             />
             {
               userName !== "" && <button className='btn btn-primary m-2' onClick={nameCheck}>Ok</button>
             }
-          </>
+          </div>
           :
           <>
             <ToDoList name={userName} />

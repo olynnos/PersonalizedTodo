@@ -5,7 +5,7 @@ export default function ToDoList({ name }) {
         <div>
             <h4 className="bg-primary text-white text-center p-2">
                 {/* Calling the userName state */}
-                {name}'s To Do List
+                {name || 'Anonymous'}'s To Do List
             </h4>
         </div>
     )
