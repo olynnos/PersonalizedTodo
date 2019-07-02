@@ -18,6 +18,10 @@ export default function ToDoList({ name }) {
         }
     }
 
+    const changeStatus = id => {
+        setTodos(todos.map(item => item.id === id ? { ...item, status: !item.status } : item))
+    }
+
     return (
         <div>
             <h4 className="bg-primary text-white text-center p-2">
@@ -36,7 +40,7 @@ export default function ToDoList({ name }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {todos.map(todo => <ToDoItem key={todo.id} id={todo.id} action={todo.action} status={todo.status} />)}
+                        {todos.map(todo => <ToDoItem key={todo.id} id={todo.id} action={todo.action} status={todo.status} changeStatus={changeStatus} />)}
                     </tbody>
                 </table>
                 <div className="input-group w-50 my-1">
