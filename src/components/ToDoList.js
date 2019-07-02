@@ -22,6 +22,11 @@ export default function ToDoList({ name }) {
         setTodos(todos.map(item => item.id === id ? { ...item, status: !item.status } : item))
     }
 
+    const deleteTask = id => {
+        const updatedTodo = todos.filter(item => item.id !== id)
+        setTodos([...updatedTodo])
+    }
+
     return (
         <div>
             <h4 className="bg-primary text-white text-center p-2">
@@ -40,7 +45,7 @@ export default function ToDoList({ name }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {todos.map(todo => <ToDoItem key={todo.id} id={todo.id} action={todo.action} status={todo.status} changeStatus={changeStatus} />)}
+                        {todos.map(todo => <ToDoItem key={todo.id} id={todo.id} action={todo.action} status={todo.status} changeStatus={changeStatus} deleteTask={deleteTask} />)}
                     </tbody>
                 </table>
                 <div className="input-group w-50 my-1">

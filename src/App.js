@@ -26,7 +26,7 @@ function App() {
             <h1>Hello there, what is your name?</h1>
             <input type="text"
               className="form-control text-center w-50"
-              placeholder='your name here'
+              placeholder='Enter your name here'
               onChange={changeName}
             />
             {
