@@ -4,6 +4,7 @@ import ToDoItem from './ToDoItem';
 
 export default function ToDoList({ name }) {
 
+
     const [todos, setTodos] = useState([{ id: 1, action: "Finish this project", status: true }])
     let [newTodo, setNewTodo] = useState("");
 
@@ -23,9 +24,17 @@ export default function ToDoList({ name }) {
     }
 
     const deleteTask = id => {
+        {/* Delete the task but also update the id so that the id will match the number of task in the list */ }
         const updatedTodo = todos.filter(item => item.id !== id)
-        setTodos([...updatedTodo])
+        let idCounter = 0
+        setTodos(updatedTodo.map(item => {
+            idCounter++;
+            return ({ ...item, id: idCounter })
+        }))
+        // setTodos([...updatedTodo])
     }
+
+
 
     return (
         <div>
