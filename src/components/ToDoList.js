@@ -9,10 +9,17 @@ export default function ToDoList({ name }) {
     let [newTodo, setNewTodo] = useState("");
 
     const updateToDo = (e) => {
+        /*
+            Check if there are any changes in the input box and set the value of the new todo item to any changes.
+        */
         setNewTodo(e.target.value)
     }
 
     const addTodo = () => {
+        /*
+            Check if there are any white spaces before or after the input value. Strip these whitespaces.
+            Also prevent from adding item to list if input box is empty or contain only whitespaces
+        */
         if (newTodo.trim() !== "") {
             setTodos([...todos, { id: todos.length + 1, action: newTodo, status: false }])
             setNewTodo("")
@@ -20,18 +27,26 @@ export default function ToDoList({ name }) {
     }
 
     const changeStatus = id => {
+        /*
+            loop through all the items in todos and find the item with the matching parameter
+            Change the status of the matchign item while returning the rest untouched
+        */
         setTodos(todos.map(item => item.id === id ? { ...item, status: !item.status } : item))
     }
 
     const deleteTask = id => {
-        {/* Delete the task but also update the id so that the id will match the number of task in the list */ }
+        /*
+            Updated the id of each element after deleting an item from the list.
+            Loop throught the new array and update each element id with the idCounter.
+            This way the id will update to match the current number of items in the lists and prevents repeating id's
+        */
         const updatedTodo = todos.filter(item => item.id !== id)
         let idCounter = 0
         setTodos(updatedTodo.map(item => {
             idCounter++;
             return ({ ...item, id: idCounter })
         }))
-        // setTodos([...updatedTodo])
+
     }
 
 
@@ -54,6 +69,7 @@ export default function ToDoList({ name }) {
                         </tr>
                     </thead>
                     <tbody>
+                        {/* Mapping through each item in the todo state and rendering them each as a ToDoItem component with props*/}
                         {todos.map(todo => <ToDoItem key={todo.id} id={todo.id} action={todo.action} status={todo.status} changeStatus={changeStatus} deleteTask={deleteTask} />)}
                     </tbody>
                 </table>
